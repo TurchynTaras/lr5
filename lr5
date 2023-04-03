@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cmath>
+#include <windows.h>
+using namespace std;
+
+double calculateY(double x) {
+    double a, b;
+    if (x < 4.3) {
+        a = -2.5;
+    }
+    else if (x == 4.3) {
+        a = 0;
+    }
+    else {
+        a = 15;
+    }
+    b = 2.6;
+    return cos(pow(log10(a * fabs(x)) / log10(3), 1.0 / 5)) / exp(sqrt(a * x)) * pow(sin(b * x), 2);
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    double x_start = -5.8, x_end = 10.6, step = 2.5;
+    int size = (int)((x_end - x_start) / step) + 1;
+    double y[7];
+
+    
+    for (int i = 0; i < size; i++) {
+        double x = x_start + i * step;
+        y[i] = calculateY(x);
+    }
+
+    
+    int comparisons = 0, exchanges = 0;
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            comparisons++;
+            if (y[j] > y[j + 1]) {
+                double temp = y[j];
+                y[j] = y[j + 1];
+                y[j + 1] = temp;
+                exchanges++;
+            }
+        }
+    }
+
+    
+    cout << "Сортовані значення:" << endl;
+    for (int i = 0; i < size; i++) {
+        cout << y[i] << " ";
+    }
+    cout << endl;
+
+    
+    cout << "Кількість порівнянь: " << comparisons << endl;
+    cout << "Кількість обмінів: " << exchanges << endl;
+
+    return 0;
+}
