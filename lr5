@@ -15,7 +15,7 @@ double calculateY(double x) {
         a = 15;
     }
     b = 2.6;
-    return cos(pow(log10(a * fabs(x)) / log10(3), 1.0 / 5)) / exp(sqrt(a * x)) * pow(sin(b * x), 2);
+    return 0.001+cos(pow(log10(fabs(a) * fabs(x)) / log10(3), 1.0 / 5)) / exp(sqrt(fabs(a * x))) * pow(sin(b * x), 2);
 }
 
 int main() {
